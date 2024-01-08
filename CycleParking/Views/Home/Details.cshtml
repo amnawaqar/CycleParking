@@ -1,0 +1,47 @@
+﻿@model CycleParkingService
+
+@{
+    ViewData["Title"] = "Details";
+}
+<h2>@ViewData["Title"] of @Model.Title </h2>
+
+<table class="table">
+    <tr>
+        <th>Title</th>
+        <th>Location</th>
+        <th>Type</th>
+        <th>Secure</th>
+        <th>Capacity</th>
+        <th>Availability</th>
+        <th>Longitude</th>
+        <th>Latitude</th>
+        <th></th>
+    </tr>
+    @if (Model != null)
+    {
+            <tr>
+            <td>@Model.Title</td>
+            <td>@Model.Location</td>
+            <td>@Model.Type</td>
+            <td>@Model.Secure</td>
+            <td>@Model.Capacity</td>
+            <td>@Model.Availability</td>
+            <td>@Model.Longitude</td>
+            <td>@Model.Latitude</td>
+            <td>
+                @if (!string.IsNullOrEmpty(Model.Latitude) && !string.IsNullOrEmpty(Model.Longitude))
+                {
+                    <a href="https://www.google.com/maps/dir/?api=1&destination=@Model.Latitude,@Model.Longitude" target="_blank">Get Directions</a>
+                }
+                else
+                {
+                    <p>Location coordinates not available for directions.</p>
+                }
+            </td>
+            </tr>
+    }
+    else
+    {
+        <p>No details available.</p>
+    }
+</table>

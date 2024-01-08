@@ -1,0 +1,38 @@
+﻿@model List<CycleParkingService>
+
+<h2>Cycle Parking List</h2>
+
+@using (Html.BeginForm("Index", "Home", FormMethod.Get))
+{
+    <p>
+        Search: @Html.TextBox("searchTerm")
+        <input type="submit" value="Search" />
+    </p>
+}
+
+<table class="table">
+    <tr>
+        <th>Title</th>
+        <th>Location</th>
+        <th>Type</th>
+    </tr>
+
+    @if (Model != null)
+    {
+        foreach (var parking in Model)
+        {
+            <tr>
+                <td>@parking.Title</td>
+                <td>@parking.Location</td>
+                <td>@parking.Type</td>
+                <td>
+                    <a href="@Url.Action("Details", "Home", new { id = @parking.Id })" class="btn btn-primary">Details</a>
+                </td>
+            </tr>
+        }
+    }
+    else
+    {
+        <p>No cycle parkings available.</p>
+    }
+</table>
